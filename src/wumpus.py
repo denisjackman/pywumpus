@@ -80,6 +80,8 @@ BATS1 = 4
 BATS2 = 5
 LOCS = 6
 
+PLAYER = [YOU, ARROWS]
+
 
 def game_setup():
     ''' game setup '''
