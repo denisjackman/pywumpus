@@ -1,4 +1,9 @@
 ''' this is the main wumpus code file '''
+
+GAME_DEBUG = True
+GAME_WON = "HEE HEE HEE - THE WUMPUS'LL GET YOU NEXT TIME!!\n"
+GAME_LOST = "HA HA HA - YOU LOSE!\n"
+
 WUMPUS_INSTRUCTIONS = "WELCOME TO 'HUNT THE WUMPUS'\n"\
                       "THE WUMPUS LIVES IN A CAVE OF 20 ROOMS. EACH ROOM\n"\
                       "HAS 3 TUNNELS LEADING TO OTHER ROOMS. (LOOK AT A\n"\
@@ -67,12 +72,6 @@ CAVES = [[1,4,7],
          [8,16,18],
          [10,17,19],
          [12,15,18],]
-GAME_WON = "HEE HEE HEE - THE WUMPUS'LL GET YOU NEXT TIME!!\n"
-GAME_LOST = "HA HA HA - YOU LOSE!\n"
-GAME_DEBUG = True
-ARROWS = 5
-
-YOU = 0
 WUMPUS = 1
 PITS = 2
 PIT2 = 3
@@ -80,21 +79,27 @@ BATS1 = 4
 BATS2 = 5
 LOCS = 6
 
-PLAYER = [YOU, ARROWS]
+ARROWS = 5
+YOU = 0
+NAME = 'Player'
+PLAYER = [YOU, ARROWS, NAME]
 
 
 def game_setup():
     ''' game setup '''
     if GAME_DEBUG:
         print('[+] Game setup starting...')
-    print(WUMPUS_INSTRUCTIONS)
-    print(f'[*] you are in Cave {YOU} : {CAVES[YOU]}')
-    print(f'[*] wumpus is in Cave {WUMPUS} : {CAVES[WUMPUS]}')
-    print(f'[*] pit 1 is in Cave {PITS} : {CAVES[PITS]}')
-    print(f'[*] pit 2 is in Cave {PIT2} : {CAVES[PIT2]}')
-    print(f'[*] bats 1 is in Cave {BATS1} : {CAVES[BATS1]}')
-    print(f'[*] bats 2 is in Cave {BATS2} : {CAVES[BATS2]}')
-    print(f'[*] locations are {LOCS} : {CAVES[LOCS]}')
+
+    if GAME_DEBUG:
+        print(WUMPUS_INSTRUCTIONS)
+        print(f'[D] you are in Cave {YOU} : {CAVES[YOU]}')
+        print(f'[D] wumpus is in Cave {WUMPUS} : {CAVES[WUMPUS]}')
+        print(f'[D] pit 1 is in Cave {PITS} : {CAVES[PITS]}')
+        print(f'[D] pit 2 is in Cave {PIT2} : {CAVES[PIT2]}')
+        print(f'[D] bats 1 is in Cave {BATS1} : {CAVES[BATS1]}')
+        print(f'[D] bats 2 is in Cave {BATS2} : {CAVES[BATS2]}')
+        print(f'[D] locations are {LOCS} : {CAVES[LOCS]}')
+
     if GAME_DEBUG:
         print('[+] Game setup complete!') 
 
@@ -103,6 +108,24 @@ def game_play():
     ''' game play '''
     if GAME_DEBUG:
         print('[+] Game play starting...')
+    game_running = True
+    while game_running:
+        menu = input('[|] Enter and option (m)ove or (s)hoot'
+                     ' or (q)uit or (i)instructions: ')
+        choice = menu.lower()
+        match choice:
+            case 'm':
+                print('[|] Moving...')
+            case 's':
+                print('[|] Shooting...')
+            case 'q':
+                print('[|] Quitting...')
+                game_running = False
+            case 'i':
+                print(WUMPUS_INSTRUCTIONS)
+            case _:
+                print('[|] Invalid choice...')
+            
 
     if GAME_DEBUG:
         print('[+] Game play complete!')
@@ -113,7 +136,8 @@ def main():
     print('[-] Wumpus Game starting...')
     game_setup()
     game_play()
-    print(f'[=] number of caves = {len(CAVES)}' )
+    if GAME_DEBUG:
+        print(f'[D] number of caves = {len(CAVES)}' )
     print('[-] Wumpus Game complete!')
 
 
