@@ -115,16 +115,19 @@ def game_play():
         choice = menu.lower()
         match choice:
             case 'm':
-                print('[|] Moving...')
+                if GAME_DEBUG:
+                    print('[|] Moving...')
             case 's':
-                print('[|] Shooting...')
+                if GAME_DEBUG:
+                    print('[|] Shooting...')
             case 'q':
-                print('[|] Quitting...')
+                if GAME_DEBUG:
+                    print('[|] Quitting...')
                 game_running = False
             case 'i':
                 print(WUMPUS_INSTRUCTIONS)
             case _:
-                print('[|] Invalid choice...')
+                print('[|] Invalid choice...'),
             
 
     if GAME_DEBUG:
